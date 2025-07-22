@@ -1,0 +1,8 @@
+{
+  "search_placeholder": "Search games...",
+  "currently_playing": "Currently Playing",
+  "wishlist": "Wishlist",
+  "finished": "Finished",
+  "add_to_list": "Add to {{list}}",
+  "hours_played": "Hours played"
+}
