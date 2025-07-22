@@ -3,17 +3,16 @@ import { Provider } from 'react-redux';
 import { store, persistor } from './src/store';
 import i18n from './src/i18n';
 import { PersistGate } from 'redux-persist/integration/react';
+import Navigation from './src/navigation';
 
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <Provider store ={store}>
+    <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <View style={styles.container}>
-          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        </View>
+        <Navigation />
       </PersistGate>
     </Provider>
   );
