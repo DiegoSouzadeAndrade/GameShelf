@@ -1,7 +1,8 @@
 import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
 import { Provider } from 'react-redux';
-import { store } from './src/store';
+import { store, persistor } from './src/store';
 import i18n from './src/i18n';
+import { PersistGate } from 'redux-persist/integration/react';
 
 
 function App() {
@@ -9,9 +10,11 @@ function App() {
 
   return (
     <Provider store ={store}>
-      <View style={styles.container}>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      </View>
+      <PersistGate loading={null} persistor={persistor}>
+        <View style={styles.container}>
+          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        </View>
+      </PersistGate>
     </Provider>
   );
 }
