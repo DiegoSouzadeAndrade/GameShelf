@@ -1,8 +1,9 @@
 {
-  "search_placeholder": "Buscar jogos...",
-  "currently_playing": "Jogando Agora",
+  "searchPlaceholder": "Buscar jogos...",
+  "currentlyPlaying": "Jogando Agora",
   "wishlist": "Lista de Desejos",
   "finished": "Finalizado",
-  "add_to_list": "Adicionar à {{list}}",
-  "hours_played": "Horas jogadas"
+  "addList": "Adicionar à {{list}}",
+  "hoursPlayed": "Horas jogadas",
+  "searchError":"Erro ao buscar jogos"
 }
