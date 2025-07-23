@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = 'YOUR_API_KEY';
+const API_KEY = '37cbf85f155743268c201803bb98fb6c';
 const BASE_URL = 'https://api.rawg.io/api';
 
 const rawgApi = axios.create({

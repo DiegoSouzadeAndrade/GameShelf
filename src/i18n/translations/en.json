@@ -5,5 +5,6 @@
   "finished": "Finished",
   "addList": "Add to {{list}}",
   "hoursPlayed": "Hours played",
-  "searchError":"Error fetching games"
+  "searchError":"Error fetching games",
+  "searchScreenTitle": "Search Results"
 }
