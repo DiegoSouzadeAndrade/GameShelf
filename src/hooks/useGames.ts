@@ -10,12 +10,14 @@ export function useGames() {
     const { t } = useTranslation();
 
     async function searchGames(query: string){
+        console.log('Searching games with query:', query);
         try {
             setLoading(true);
             setError(null);
             const response = await rawgApi.get('/games', {
                 params: { search: query },
             });
+            console.log('++++++++++++', response.data.results);
             setGames(response.data.results);
         } catch (error) {
             setError(t('searchError'));

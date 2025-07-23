@@ -1,29 +1,20 @@
 import React, {useState} from 'react';
-import { View, TextInput, FlatList, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TextInput, FlatList, ActivityIndicator, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useGames } from '../hooks/useGames';
+import { Game } from '../types/customTypes';
 import { useTranslation } from 'react-i18next';
 
 export default function GameSearchScreen(){
     const [query, setQuery] = useState('');
+    const { games, loading, error, searchGames } = useGames();
+    const navigation = useNavigation<any>();
     const { t, i18n } = useTranslation();
-
-    const games = [
-  {
-    id: 0,
-    name: 'Wow',
-  },
-  {
-    id: 1,
-    name: 'Dota',
-  },
-  {
-    id: 2,
-    name: 'Zelda',
-  },
-];
+    //i18n.changeLanguage('en-US');
 
     function handleSearch(){
         if(query.length > 2){
-            console.log('===========', query)
+            searchGames(query);
         }
     }
 
@@ -32,9 +23,10 @@ export default function GameSearchScreen(){
         return (
             <TouchableOpacity 
                 style={styles.item}
-                onPress={()=> console.log('0000000000000')}
+                onPress={()=> navigation.navigate('GameDetails', { gameId: item.id })}
             >
                 <Text style={styles.title}>{item.name}</Text>
+                <Text style={styles.sub}>{item.status}</Text>
             </TouchableOpacity>
         );
     }
@@ -48,6 +40,9 @@ export default function GameSearchScreen(){
                 onSubmitEditing={handleSearch}
                 style={styles.input}
             />
+
+            {loading && <ActivityIndicator size="large" />}
+            {error && <Text style={styles.error}>{error}</Text>}
 
             <FlatList 
                 data={games}
