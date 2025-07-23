@@ -1,8 +1,9 @@
 {
-  "search_placeholder": "Search games...",
-  "currently_playing": "Currently Playing",
+  "searchPlaceholder": "Search games...",
+  "currentlyPlaying": "Currently Playing",
   "wishlist": "Wishlist",
   "finished": "Finished",
-  "add_to_list": "Add to {{list}}",
-  "hours_played": "Hours played"
+  "addList": "Add to {{list}}",
+  "hoursPlayed": "Hours played",
+  "searchError":"Error fetching games"
 }

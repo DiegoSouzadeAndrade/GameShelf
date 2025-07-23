@@ -1,13 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {GameStatus} from '../../types/customTypes';
-
-export interface Game {
-    id: number;
-    name: string;
-    status: GameStatus;
-    backgroundImage: string;
-    hoursPlayed?: number;
-}
+import {GameStatus, Game} from '../../types/customTypes';
 
 interface CollectionState {
     games: Game[];
