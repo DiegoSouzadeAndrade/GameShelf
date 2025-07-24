@@ -88,11 +88,6 @@ const styles = StyleSheet.create({
     color: '#666',
     marginBottom: 4,
   },
-  description: {
-    marginVertical: 16,
-    fontSize: 16,
-    lineHeight: 22,
-  },
   buttonContainer: {
     flexDirection: 'row', 
     marginTop: 75, 
