@@ -6,5 +6,10 @@
   "addList": "Adicionar à {{list}}",
   "hoursPlayed": "Horas jogadas",
   "searchError":"Erro ao buscar jogos",
-  "searchScreenTitle": "Resultados da Busca"
+  "searchScreenTitle": "Resultados da Busca",
+  "hoursPlayedAlertSubtitle": "Insira as horas jogadas",
+  "hoursPlayedAlertTitle": "Adicionar Horas Jogadas",
+  "releaseDate": "Data de Lançamento:",
+  "rating": "Avaliação:",
+  "hoursModalInputPlaceholder":"ex: 10"
 }

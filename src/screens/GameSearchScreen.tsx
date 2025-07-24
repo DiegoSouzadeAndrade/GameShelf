@@ -23,7 +23,7 @@ export default function GameSearchScreen(){
         return (
             <TouchableOpacity 
                 style={styles.item}
-                onPress={()=> navigation.navigate('GameDetails', { gameId: item.id })}
+                onPress={()=> navigation.navigate('GameDetails', { game: item })}
             >
                 <Text style={styles.title}>{item.name}</Text>
                 <Text style={styles.sub}>{item.status}</Text>
