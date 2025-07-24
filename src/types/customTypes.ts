@@ -24,3 +24,9 @@ export type ActionButtonProps = {
     size: number;
     color: string
 };
+
+export type HoursModalProps = {
+  visible: boolean;
+  onClose: () => void;
+  onConfirm: (hours: string) => void;
+};
