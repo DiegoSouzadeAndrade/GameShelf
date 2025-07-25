@@ -1,8 +1,6 @@
-export type GameStatus = 'playing' | 'wishlist' | 'finished';
-
-export enum GameCategory {
+export enum GameStatus {
+    PLAYING = 'playing',
     WISHLIST = 'wishlist',
-    CURRENTLY_PLAYING = 'currentlyPlaying',
     FINISHED = 'finished',
 }
 
@@ -12,7 +10,7 @@ export interface Game {
     status: GameStatus;
     background_image: string;
     hoursPlayed?: number;
-    category?: GameCategory;
+    category?: string;
     released?: string;
     description?: string;
     rating?: number;

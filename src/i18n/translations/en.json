@@ -11,5 +11,7 @@
   "hoursPlayedAlertTitle": "Add Hours Played",
   "releaseDate": "Release Date:",
   "rating": "Rating:",
-  "hoursModalInputPlaceholder":"e.g. 10"
+  "hoursModalInputPlaceholder":"e.g. 10",
+  "emptyGameList": "No games found in this list.",
+  "collection": "Collection"
 }

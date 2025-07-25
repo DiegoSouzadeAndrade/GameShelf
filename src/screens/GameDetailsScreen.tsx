@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, ScrollView, ActivityIndicator, Alert } f
 import { useRoute } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { addGame } from '../store/slices/collectionSlice';
-import { Game, GameCategory } from '../types/customTypes';
+import { Game, GameStatus } from '../types/customTypes';
 import { useTranslation } from 'react-i18next';
 import ActionButton from '../components/actionButton';
 import HoursModal from '../components/HoursModal';
@@ -19,17 +19,17 @@ export default function GameDetailsScreen(){
     const { t } = useTranslation();
     const [isModalVisible, setIsModalVisible] = useState(false);
 
-    const handleAdd = (category: GameCategory) => {
-        if(category === GameCategory.FINISHED){
+    const handleAdd = (status: GameStatus) => {
+        if(status === GameStatus.FINISHED){
             setIsModalVisible(true);
         } else {
-            dispatch(addGame({ ...game, category }))
+            dispatch(addGame({ ...game, status }))
         }
     };
 
     const handleConfirmHours = (hours: string) =>{
         var hoursPlayedParsed = parseFloat(hours)
-        dispatch(addGame({ ...game, category: GameCategory.FINISHED, hoursPlayed: hoursPlayedParsed }));
+        dispatch(addGame({ ...game, status: GameStatus.FINISHED, hoursPlayed: hoursPlayedParsed }));
         setIsModalVisible(false);
     }
 
@@ -41,19 +41,19 @@ export default function GameDetailsScreen(){
             <Text style={styles.info}>{t('rating')} {game.rating}</Text>
             <View style={styles.buttonContainer}>
                 <ActionButton 
-                    onPress={() => handleAdd(GameCategory.CURRENTLY_PLAYING)} 
+                    onPress={() => handleAdd(GameStatus.PLAYING)} 
                     name='play' 
                     size={32} 
                     color='#E16359' 
                 />
                 <ActionButton 
-                    onPress={() => handleAdd(GameCategory.WISHLIST)} 
+                    onPress={() => handleAdd(GameStatus.WISHLIST)} 
                     name='plus' 
                     size={32} 
                     color='#E16359' 
                 />
                 <ActionButton 
-                    onPress={() => handleAdd(GameCategory.FINISHED)} 
+                    onPress={() => handleAdd(GameStatus.FINISHED)} 
                     name='check' 
                     size={32} 
                     color='#E16359' 
