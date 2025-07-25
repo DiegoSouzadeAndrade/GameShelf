@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { View, TextInput, FlatList, ActivityIndicator, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TextInput, FlatList, ActivityIndicator, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useGames } from '../hooks/useGames';
 import GameCard from '../components/GameCard';
@@ -46,7 +46,7 @@ export default function GameSearchScreen(){
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16 },
+  container: { flex: 1, padding: 16, backgroundColor: '#f0dddbff' },
   input: {
     height: 48,
     borderRadius: 8,

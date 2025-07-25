@@ -16,7 +16,7 @@ const HoursModal: React.FC<HoursModalProps> = ({ visible, onClose, onConfirm }) 
     };
 
     return (
-        <Modal visible={visible} animationType='slide' transparent>
+        <Modal visible={visible} animationType='fade' transparent>
             <View style={styles.overlay}>
                 <View style={styles.container}>
                     <Text style={styles.title}>{t('hoursPlayedAlertTitle')}</Text>
@@ -32,7 +32,7 @@ const HoursModal: React.FC<HoursModalProps> = ({ visible, onClose, onConfirm }) 
                             <Icon name='close' size={32} color='#E16359' />
                         </TouchableOpacity>
                         <TouchableOpacity style={[styles.button, styles.confirm]} onPress={handleConfirm}>
-                            <Icon name='close' size={32} color='#E16359' />
+                            <Icon name='check' size={32} color='#57e263ff' />
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -78,10 +78,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   cancel: {
-    backgroundColor: '#ccc',
+    backgroundColor: 'white',
   },
   confirm: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: 'white',
   }
 });
 
