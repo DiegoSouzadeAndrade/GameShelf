@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { View, TextInput, FlatList, ActivityIndicator, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useGames } from '../hooks/useGames';
-import { Game } from '../types/customTypes';
+import GameCard from '../components/GameCard';
 import { useTranslation } from 'react-i18next';
 
 export default function GameSearchScreen(){
@@ -10,25 +10,11 @@ export default function GameSearchScreen(){
     const { games, loading, error, searchGames } = useGames();
     const navigation = useNavigation<any>();
     const { t, i18n } = useTranslation();
-    //i18n.changeLanguage('en-US');
 
     function handleSearch(){
         if(query.length > 2){
             searchGames(query);
         }
-    }
-
-    function renderItem( {item}: any) {
-        console.log('===========', item.name)
-        return (
-            <TouchableOpacity 
-                style={styles.item}
-                onPress={()=> navigation.navigate('GameDetails', { game: item })}
-            >
-                <Text style={styles.title}>{item.name}</Text>
-                <Text style={styles.sub}>{item.status}</Text>
-            </TouchableOpacity>
-        );
     }
 
     return (
@@ -47,7 +33,12 @@ export default function GameSearchScreen(){
             <FlatList 
                 data={games}
                 keyExtractor={(item) => item.id.toString()}
-                renderItem={renderItem}
+                renderItem={({item})=>(
+                    <GameCard 
+                        game={item}
+                        onPress={()=> navigation.navigate('GameDetails', { game: item })}
+                    />
+                )}
                 contentContainerStyle={styles.list}
             />
         </View>
