@@ -1,5 +1,5 @@
 import React,  { useRef } from 'react';
-import { StyleSheet, TouchableWithoutFeedback, Animated, Easing } from 'react-native';
+import { StyleSheet, TouchableWithoutFeedback, Animated } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { ActionButtonProps } from '../types/customTypes';
 
