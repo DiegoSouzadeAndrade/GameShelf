@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import GameSearchScreen from '../screens/GameSearchScreen';
-//import MyCollectionScreen from '../screens/MyCollectionScreen';
+import MyCollectionScreen from '../screens/MyCollectionScreen';
 import Icon from 'react-native-vector-icons/Feather';
 import { useTranslation } from 'react-i18next';
 
@@ -23,7 +23,7 @@ export default function TabNavigator(){
             })}
         >
             <Tab.Screen name="Search" component={GameSearchScreen} options={{title: t('searchScreenTitle')}}/>
-            {/* <Tab.Screen name="Collection" component={MyCollectionScreen} options={{title: t('collection')}}/> */}
+            <Tab.Screen name="Collection" component={MyCollectionScreen} options={{title: t('collection')}}/>
         </Tab.Navigator>
     )
 }
