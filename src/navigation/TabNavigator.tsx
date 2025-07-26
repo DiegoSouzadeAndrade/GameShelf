@@ -18,7 +18,7 @@ export default function TabNavigator(){
                     return <Icon name={iconName} size={size} color={color} />;
                 },
                 headerShown: true,
-                tabBarActiveTintColor: '#6200ee',
+                tabBarActiveTintColor: '#f09f08ff',
                 tabBarInactiveTintColor: 'gray',
             })}
         >

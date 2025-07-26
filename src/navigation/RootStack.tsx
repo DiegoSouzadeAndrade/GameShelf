@@ -14,7 +14,13 @@ export default function RootStack(){
     return (
         <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name="Tabs" component={TabNavigator}/>
-            <Stack.Screen name="GameDetails" component={GameDetailsScreen}/>
+            <Stack.Screen 
+                name="GameDetails" 
+                component={GameDetailsScreen} 
+                options={{
+                headerShown: false,
+                animation: 'fade',
+  }}/>
         </Stack.Navigator>
     )
 }

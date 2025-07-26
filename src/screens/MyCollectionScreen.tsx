@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { useSelector, useDispatch } from 'react-redux';
 import { 
@@ -10,33 +10,9 @@ import {
     editHoursPlayed
 } from '../store/slices/collectionSlice';
 import { useTranslation } from 'react-i18next';
-import {GameStatus } from '../types/customTypes';
-import ActionButton from '../components/actionButton';
-
-const GameCollectionList = ({ data, onRemove, onEditHours }: any) => {
-    const {t} = useTranslation();
-
-    return (
-    <FlatList 
-        data={data}
-        keyExtractor={(item)=> item.id.toString()}
-        renderItem={({item}) =>(
-            <View style={styles.card}>
-                <Text style={styles.gameTitle}>{item.name}</Text>
-                {item.hours !== undefined && (
-                    <Text style={styles.hours}>{t('hoursPlayed')}: {item.hoursPlayed}</Text>
-                )}
-                <View style={styles.actions}>
-                    {item.status === GameStatus.FINISHED && (
-                        <ActionButton name='edit' size={32} onPress={()=> onEditHours(item.id)} color='black'/>
-                    )}
-                    <ActionButton name='remove' size={32} onPress={()=> onRemove(item.id)} color='red' />
-                </View>
-            </View>
-        )}
-        ListEmptyComponent={<Text style={styles.empty}>{t('emptyGameList')}</Text>}
-    />
-)};
+import { GameStatus } from '../types/customTypes';
+import GameCollectionList from '../components/GameCollectionList';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const MyCollectionScreen = () => {
     const dispatch = useDispatch();
@@ -44,9 +20,9 @@ const MyCollectionScreen = () => {
     const [index, setIndex] = useState(0);
     const {t} = useTranslation();
     const [routes] = useState([
-        {key: GameStatus.PLAYING, title: t('currentlyPlaying')},
-        {key: GameStatus.WISHLIST, title: t('wishlist')},
-        {key: GameStatus.FINISHED, title: t('Finished')},
+        {key: GameStatus.PLAYING, title: t('currentlyPlaying'), icon: 'playcircleo'},
+        {key: GameStatus.WISHLIST, title: t('wishlist'), icon: 'pluscircleo'},
+        {key: GameStatus.FINISHED, title: t('Finished'), icon:'checkcircleo'},
     ])
 
     const playingGames = useSelector(selectPlayingGames);
@@ -64,9 +40,21 @@ const MyCollectionScreen = () => {
     }
 
     const renderScene = SceneMap({
-    [GameStatus.PLAYING]: () => <GameCollectionList data={playingGames} onRemove={handleRemove} onEditHours={handleEditHours} />,
-    [GameStatus.WISHLIST]: () => <GameCollectionList data={wishlistGames} onRemove={handleRemove} onEditHours={handleEditHours} />,
-    [GameStatus.FINISHED]: () => <GameCollectionList data={finishedGames} onRemove={handleRemove} onEditHours={handleEditHours} />,
+    [GameStatus.PLAYING]: () => (
+      <View style={styles.container}>
+        <GameCollectionList data={playingGames} onRemove={handleRemove} onEditHours={handleEditHours} />
+      </View>
+    ),
+    [GameStatus.WISHLIST]: () => (
+      <View style={styles.container}>
+        <GameCollectionList data={wishlistGames} onRemove={handleRemove} onEditHours={handleEditHours} />
+      </View>
+    ),
+    [GameStatus.FINISHED]: () => (
+      <View style={styles.container}>
+        <GameCollectionList data={finishedGames} onRemove={handleRemove} onEditHours={handleEditHours} />
+      </View>
+  ),
   });
 
   return (
@@ -77,8 +65,31 @@ const MyCollectionScreen = () => {
         renderTabBar={(props)=> (
             <TabBar 
                 {...props}
-                indicatorStyle={{ backgroundColor: 'blue'}}
-                style={{ backgroundColor: 'white'}}
+                renderTabBarItem={({ route, key}) => {
+                  const focused = props.navigationState.index === props.navigationState.routes.findIndex(r => r.key === key);
+
+                  return (
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Icon 
+                      name={route.icon} 
+                      size={20} 
+                      color={focused ? '#E16359' : '#999'} 
+                      style={{marginRight: 6, marginLeft: 6}}
+                    />
+                    <Text
+                      style={{
+                        color: focused ? '#E16359' : '#999', 
+                        fontWeight: focused ? 'bold' : 'normal',
+                        fontSize: 18,
+                        marginTop: 2,
+                      }}
+                      >
+                    {route.title}
+                    </Text>
+                  </View>
+                )}}
+                indicatorStyle={{ backgroundColor: '#E16359', height: 3 }}
+                style={{ backgroundColor: '#fff', elevation: 2 }}
             />
         )}
     />
@@ -86,36 +97,12 @@ const MyCollectionScreen = () => {
 }
 
 const styles = StyleSheet.create({
-  card: {
-    padding: 12,
-    margin: 8,
-    backgroundColor: '#f5f5f5',
-    borderRadius: 8,
-  },
-  gameTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  hours: {
-    fontSize: 14,
-    color: '#555',
-  },
-  actions: {
-    flexDirection: 'row',
+  container: {
+    flex: 1,
+    padding: 16,
     justifyContent: 'space-between',
-    marginTop: 8,
-  },
-  edit: {
-    color: 'green',
-  },
-  remove: {
-    color: 'red',
-  },
-  empty: {
-    textAlign: 'center',
-    marginTop: 20,
-    color: '#888',
-  },
+    backgroundColor:'#f0dddbff' 
+  }
 });
 
 export default MyCollectionScreen

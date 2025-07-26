@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, ActivityIndicator, Alert } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { View, Text, Image, StyleSheet, ScrollView, ActivityIndicator, Alert, Animated, StatusBar, Dimensions } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { addGame } from '../store/slices/collectionSlice';
@@ -12,12 +12,18 @@ type RouteParams = {
     game: Game;
 };
 
+const HEADER_HEIGHT = 250;
+const { width } = Dimensions.get('screen')
+
 export default function GameDetailsScreen(){
     const route = useRoute();
     const { game } = route.params as RouteParams;
     const dispatch = useDispatch();
     const { t } = useTranslation();
+
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const scrollY = useRef(new Animated.Value(0)).current;
+
 
     const handleAdd = (status: GameStatus) => {
         if(status === GameStatus.FINISHED){
@@ -34,64 +40,86 @@ export default function GameDetailsScreen(){
     }
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
-            <Image source={{uri: game.background_image}} style={styles.image} />
-            <Text style={styles.title}>{game.name}</Text>
-            <Text style={styles.info}>{t('releaseDate')} {game.released}</Text>
-            <Text style={styles.info}>{t('rating')} {game.rating}</Text>
-            <View style={styles.buttonContainer}>
-                <ActionButton 
-                    onPress={() => handleAdd(GameStatus.PLAYING)} 
-                    name='play' 
-                    size={32} 
-                    color='#E16359' 
-                />
-                <ActionButton 
-                    onPress={() => handleAdd(GameStatus.WISHLIST)} 
-                    name='plus' 
-                    size={32} 
-                    color='#E16359' 
-                />
-                <ActionButton 
-                    onPress={() => handleAdd(GameStatus.FINISHED)} 
-                    name='check' 
-                    size={32} 
-                    color='#E16359' 
-                />
-            </View>
-            <HoursModal 
-                visible={isModalVisible}
-                onClose={()=> setIsModalVisible(false)}
-                onConfirm={handleConfirmHours}
+        <View style={{flex: 1, backgroundColor: '#fff',}}>
+            <StatusBar translucent backgroundColor="transparent" barStyle='light-content' />
+            <Animated.Image 
+                source={{ uri: game.background_image }}
+                style={[
+                    styles.image,
+                    {
+                        transform: [
+                            {
+                                scale: scrollY.interpolate({
+                                    inputRange: [-150, 0 , 150],
+                                    outputRange: [1.4, 1, 1],
+                                    extrapolate: "clamp",
+                                }),
+                            },
+                        ],
+                    },
+                ]}
+                resizeMode='cover'
             />
-        </ScrollView>
+            <View style={styles.container}>
+                <View>
+                    <Text style={styles.title}>{game.name}</Text>
+                    <Text style={styles.info}>{t('releaseDate')} {game.released}</Text>
+                    <Text style={styles.info}>{t('rating')} {game.rating}</Text>
+                </View>
+                    <View style={styles.buttonContainer}>
+                        <ActionButton 
+                            onPress={() => handleAdd(GameStatus.PLAYING)} 
+                            name='play' 
+                            size={32} 
+                            color='#E16359' 
+                        />
+                        <ActionButton 
+                            onPress={() => handleAdd(GameStatus.WISHLIST)} 
+                            name='plus' 
+                            size={32} 
+                            color='#E16359' 
+                        />
+                        <ActionButton 
+                            onPress={() => handleAdd(GameStatus.FINISHED)} 
+                            name='check' 
+                            size={32} 
+                            color='#E16359' 
+                        />
+                    </View>
+                </View>
+                <HoursModal 
+                    visible={isModalVisible}
+                    onClose={()=> setIsModalVisible(false)}
+                    onConfirm={handleConfirmHours}
+                />
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     padding: 16,
-    backgroundColor: '#fff',
+    justifyContent: 'space-between',
+    backgroundColor:'#f0dddbff' 
   },
   image: {
-    width: '100%',
-    height: 200,
-    borderRadius: 10,
-    marginBottom: 16,
+    width: width,
+    height: HEADER_HEIGHT,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
+    marginBottom: 8,
   },
   info: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: 16,
+    color: '#555',
     marginBottom: 4,
   },
   buttonContainer: {
-    flexDirection: 'row', 
-    marginTop: 75, 
+    flexDirection: 'row',
     justifyContent: 'space-evenly',
-    alignItems: 'center',
+    marginBottom: 20
   }
 });
