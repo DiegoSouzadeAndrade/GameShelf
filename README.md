@@ -1,97 +1,115 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+🎮 GameShelf
 
-# Getting Started
+    Organize, descubra e acompanhe seus jogos favoritos de forma elegante e intuitiva.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+GameShelf é um aplicativo mobile desenvolvido em React Native (CLI) com TypeScript, que permite ao usuário pesquisar jogos através da API RAWG, organizá-los em coleções personalizadas (Jogando, Desejados e Finalizados), registrar horas jogadas e navegar em uma interface moderna com animações fluidas.
 
-## Step 1: Start Metro
+✨ Funcionalidades
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+    Pesquisa de Jogos: Integração com a RAWG API para buscar jogos populares.
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+    Coleções Personalizadas:
 
-```sh
-# Using npm
-npm start
+        Jogando
 
-# OR using Yarn
-yarn start
-```
+        Lista de Desejos
 
-## Step 2: Build and run your app
+        Finalizados (com registro de horas jogadas)
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+    Detalhes do Jogo: Tela completa com capa, avaliação e data de lançamento.
 
-### Android
+    Animações Modernas: Transições suaves com Animated API.
 
-```sh
-# Using npm
-npm run android
+    Internacionalização (i18n): Suporte a múltiplos idiomas (EN/PT).
 
-# OR using Yarn
-yarn android
-```
+    Design Responsivo: Interface elegante e intuitiva para Android.
 
-### iOS
+🛠️ Tecnologias Utilizadas
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+    React Native CLI
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+    TypeScript
 
-```sh
-bundle install
-```
+    Redux Toolkit + Redux Persist
 
-Then, and every time you update your native dependencies, run:
+    React Navigation
 
-```sh
-bundle exec pod install
-```
+    react-i18next (i18n)
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+    RAWG API
 
-```sh
-# Using npm
-npm run ios
+    Animated API do React Native
 
-# OR using Yarn
-yarn ios
-```
+🚀 Como Rodar o Projeto
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+1. Clonar o repositório
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+git clone https://github.com/DiegoSouzadeAndrade/GameShelf.git
+cd GameShelf
 
-## Step 3: Modify your app
+2. Instalar dependências
 
-Now that you have successfully run the app, let's make changes!
+npm install
+# ou
+yarn install
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+3. Configurar variáveis de ambiente
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+Adicione sua chave da RAWG API:
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+RAWG_API_KEY=SUA_CHAVE_AQUI
 
-## Congratulations! :tada:
+4. Rodar no Android
 
-You've successfully run and modified your React Native App. :partying_face:
+Certifique-se de ter o emulador ou dispositivo físico configurado:
 
-### Now what?
+npx react-native run-android
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+📂 Estrutura de Pastas
 
-# Troubleshooting
+gameshelf/
+├── android/
+├── ios/
+├── src/
+│   ├── __mocks__/     # mocks para testes  
+│   ├── __tests__/     # testes  
+│   ├── api/        
+│   ├── assets/        
+│   ├── components/    # Componentes reutilizáveis
+│   ├── hooks/         # Custom hooks
+│   ├── i18n/          # Arquivos de i18n
+│   ├── navigation/    
+│   ├── screens/       # Telas do app
+│   ├── store/         # Redux slices
+│   ├── types/         # Tipagens TypeScript
+│   └── utils/         
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
 
-# Learn More
+🖼️ Ícones e Splash Screen
 
-To learn more about React Native, take a look at the following resources:
+    Ícones Android gerados e otimizados para mdpi, hdpi, xhdpi, xxhdpi e xxxhdpi.
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+    Splash screen responsivo e adaptado para múltiplas densidades de tela.
+
+🔮 Roadmap
+
+Dark Mode
+
+UX aprimorada
+
+Filtros avançados por gênero e plataforma
+
+Backup/Sync na nuvem
+
+    Compartilhamento de coleções
+
+🤝 Contribuição
+
+Contribuições são sempre bem-vindas!
+Para contribuir:
+
+    Crie uma branch (feature/nome-da-feature)
+
+    Faça commit das alterações
+
+    Abra um Pull Request
