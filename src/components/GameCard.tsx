@@ -2,13 +2,17 @@ import React, {useEffect, useRef} from 'react';
 import { Animated, Pressable, Text, StyleSheet, Image, View } from 'react-native';
 import { Game } from '../types/customTypes';
 import { useTranslation } from 'react-i18next';
+import ActionButton from './actionButton';
 
 interface Props {
     game: Game;
-    onPress: ()=> void;
+    onPress?: ()=> void;
+    onRemove?: ()=> void;
+    onEditHours?: ()=> void;
+    showActions?: boolean;
 }
 
-const GameCard: React.FC<Props> = ({ game, onPress }) => {
+const GameCard: React.FC<Props> = ({ game, onPress, onRemove, onEditHours, showActions }) => {
     const translateY = useRef(new Animated.Value(20)).current;
     const opacity = useRef(new Animated.Value(0)).current;
     const {t} = useTranslation();
@@ -30,12 +34,26 @@ const GameCard: React.FC<Props> = ({ game, onPress }) => {
 
     return (
         <Animated.View style={[styles.card, {opacity,transform:[{translateY}]}]}>
-            <Pressable onPress={onPress} style={({ pressed })=>[{ transform: [{ scale: pressed ? 0.97 : 1 }] }]}>
-                <Image source={{uri: game.background_image}} style={styles.image} />
-                <View style={styles.info}>
-                    <Text style={styles.title} numberOfLines={1}>{game.name}</Text>
-                    <Text style={styles.subtitle}>{t('rating')}: {game.rating}</Text>
-                </View>
+            <Pressable 
+              onPress={onPress} 
+              style={({ pressed })=>[{ transform: [{ scale: pressed ? 0.97 : 1 }] }]}
+            >
+              <Image source={{uri: game.background_image}} style={styles.image} />
+              <View style={styles.info}>
+                  <Text style={styles.title} numberOfLines={1}>{game.name}</Text>
+                  <Text style={styles.subtitle}>{t('rating')}: {game.rating}</Text>
+                  {game.hoursPlayed !== undefined && (
+                    <Text style={styles.hours}>{t('hoursPlayed')}: {game.hoursPlayed}</Text>
+                  )}
+                  <View style={styles.actions}>
+                    {onEditHours && game.hoursPlayed !== undefined && (
+                      <ActionButton name="edit" size={28} color="black" onPress={onEditHours} />
+                    )}
+                    {onRemove && (
+                      <ActionButton name="delete" size={28} color="red" onPress={onRemove} />
+                    )}
+                  </View>
+              </View>
             </Pressable>
         </Animated.View>
     )
@@ -58,8 +76,18 @@ const styles = StyleSheet.create({
     height: 180,
     width: '100%',
   },
+  hours: {
+    fontSize: 14,
+    color: '#555',
+  },
   info: {
     padding: 12,
+  },
+  actions: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    gap: 8,
+    marginTop: 8,
   },
   title: {
     fontSize: 18,
