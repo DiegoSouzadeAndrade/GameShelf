@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { useSelector, useDispatch } from 'react-redux';
 import { 
@@ -12,6 +12,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { GameStatus } from '../types/customTypes';
 import GameCollectionList from '../components/GameCollectionList';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const MyCollectionScreen = () => {
     const dispatch = useDispatch();
@@ -19,9 +20,9 @@ const MyCollectionScreen = () => {
     const [index, setIndex] = useState(0);
     const {t} = useTranslation();
     const [routes] = useState([
-        {key: GameStatus.PLAYING, title: t('currentlyPlaying')},
-        {key: GameStatus.WISHLIST, title: t('wishlist')},
-        {key: GameStatus.FINISHED, title: t('Finished')},
+        {key: GameStatus.PLAYING, title: t('currentlyPlaying'), icon: 'playcircleo'},
+        {key: GameStatus.WISHLIST, title: t('wishlist'), icon: 'pluscircleo'},
+        {key: GameStatus.FINISHED, title: t('Finished'), icon:'checkcircleo'},
     ])
 
     const playingGames = useSelector(selectPlayingGames);
@@ -64,6 +65,29 @@ const MyCollectionScreen = () => {
         renderTabBar={(props)=> (
             <TabBar 
                 {...props}
+                renderTabBarItem={({ route, key}) => {
+                  const focused = props.navigationState.index === props.navigationState.routes.findIndex(r => r.key === key);
+
+                  return (
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Icon 
+                      name={route.icon} 
+                      size={20} 
+                      color={focused ? '#E16359' : '#999'} 
+                      style={{marginRight: 6, marginLeft: 6}}
+                    />
+                    <Text
+                      style={{
+                        color: focused ? '#E16359' : '#999', 
+                        fontWeight: focused ? 'bold' : 'normal',
+                        fontSize: 18,
+                        marginTop: 2,
+                      }}
+                      >
+                    {route.title}
+                    </Text>
+                  </View>
+                )}}
                 indicatorStyle={{ backgroundColor: '#E16359', height: 3 }}
                 style={{ backgroundColor: '#fff', elevation: 2 }}
             />
