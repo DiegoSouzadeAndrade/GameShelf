@@ -1,0 +1,17 @@
+{
+  "searchPlaceholder": "Buscar jogos...",
+  "currentlyPlaying": "Jogando Agora",
+  "wishlist": "Lista de Desejos",
+  "finished": "Finalizado",
+  "addList": "Adicionar à {{list}}",
+  "hoursPlayed": "Horas jogadas",
+  "searchError":"Erro ao buscar jogos",
+  "searchScreenTitle": "Resultados da Busca",
+  "hoursPlayedAlertSubtitle": "Insira as horas jogadas",
+  "hoursPlayedAlertTitle": "Adicionar Horas Jogadas",
+  "releaseDate": "Data de Lançamento:",
+  "rating": "Avaliação:",
+  "hoursModalInputPlaceholder":"ex: 10",
+  "emptyGameList": "Nenhum jogo encontrado nesta lista.",
+  "collection": "Coleção"
+}

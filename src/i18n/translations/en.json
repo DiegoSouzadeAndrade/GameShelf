@@ -1,0 +1,17 @@
+{
+  "searchPlaceholder": "Search games...",
+  "currentlyPlaying": "Currently Playing",
+  "wishlist": "Wishlist",
+  "finished": "Finished",
+  "addList": "Add to {{list}}",
+  "hoursPlayed": "Hours played",
+  "searchError":"Error fetching games",
+  "searchScreenTitle": "Search Results",
+  "hoursPlayedAlertSubtitle": "Enter hours played",
+  "hoursPlayedAlertTitle": "Add Hours Played",
+  "releaseDate": "Release Date:",
+  "rating": "Rating:",
+  "hoursModalInputPlaceholder":"e.g. 10",
+  "emptyGameList": "No games found in this list.",
+  "collection": "Collection"
+}
